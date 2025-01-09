@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  log-processor
+
+  Sample SAM Template for log-processor
+
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  LogProcessor:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: src/
+      Handler: app.lambda_handler
+      Runtime: python3.12
+      Architectures:
+        - x86_64
+      Events:
+        LogProcessorAPI:
+          Type: Api 
+          Properties:
+            Path: /log-data-processor
+            Method: post
